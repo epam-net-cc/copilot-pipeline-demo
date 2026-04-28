@@ -1,0 +1,80 @@
+# NASA Exoplanet Discovery Dashboard
+
+Full-stack app that visualizes NASA public exoplanet data using:
+- React + TypeScript + Vite frontend
+- ASP.NET Core Web API backend (C#)
+- Retry logic for transient upstream failures
+
+## Project Structure
+
+- frontend: React TypeScript dashboard
+- backend: .NET Web API proxy to NASA Exoplanet Archive TAP endpoint
+
+## Data Source
+
+This implementation uses the NASA Exoplanet Archive TAP sync endpoint:
+- https://exoplanetarchive.ipac.caltech.edu/TAP/sync
+
+Note: This endpoint does not require a NASA API key. You selected DEMO_KEY initially, but for this data source no key is needed.
+
+## Backend Features
+
+- Endpoint: GET /api/exoplanets/tap
+- Query passthrough model (single endpoint)
+- Retries on transient failures:
+  - HTTP 429
+  - HTTP 5xx
+  - network/timeouts
+- Exponential backoff with jitter
+- Configurable options via appsettings.json
+
+## Frontend Features
+
+- On-demand fetch button
+- Filters:
+  - Start year
+  - End year
+  - Discovery method
+  - Host star name contains text
+- Visualizations:
+  - Discovery timeline line chart
+  - Discovery method comparison bars
+- KPI cards:
+  - Total planets
+  - Distinct host stars
+  - Top method
+  - Peak discovery year
+
+## Run Locally
+
+### 1) Start backend
+
+From backend folder:
+
+dotnet run --urls http://localhost:5099
+
+### 2) Start frontend
+
+From frontend folder:
+
+npm run dev
+
+The frontend runs on http://localhost:5173 and proxies /api requests to http://localhost:5099.
+
+## Build
+
+### Backend
+
+dotnet build
+
+### Frontend
+
+npm run build
+
+## Configuration
+
+Backend settings are in backend/appsettings.json under NasaApi:
+- TapBaseUrl
+- TimeoutSeconds
+- MaxRetries
+- InitialBackoffMilliseconds
