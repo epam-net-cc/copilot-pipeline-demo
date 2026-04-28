@@ -3,7 +3,6 @@ import './Pagination.css';
 interface PaginationProps {
   currentSince: number;
   perPage: number;
-  onSinceChange: (value: number) => void;
   onPerPageChange: (value: number) => void;
   onNextPage: () => void;
   onPreviousPage: () => void;
@@ -14,7 +13,6 @@ interface PaginationProps {
 export function Pagination({
   currentSince,
   perPage,
-  onSinceChange,
   onPerPageChange,
   onNextPage,
   onPreviousPage,
@@ -24,19 +22,6 @@ export function Pagination({
   return (
     <div className="pagination">
       <div className="pagination-controls">
-        <div className="control-group">
-          <label htmlFor="since">Start ID (Since):</label>
-          <input
-            id="since"
-            type="number"
-            min="0"
-            value={currentSince}
-            onChange={(e) => onSinceChange(Math.max(0, parseInt(e.target.value) || 0))}
-            disabled={isLoading}
-            className="input-field"
-          />
-        </div>
-
         <div className="control-group">
           <label htmlFor="perPage">Per Page:</label>
           <select
@@ -74,7 +59,7 @@ export function Pagination({
       </div>
 
       <div className="pagination-info">
-        <p>Showing users from ID <strong>{currentSince}</strong> with <strong>{perPage}</strong> per page</p>
+        <p>Showing <strong>{perPage}</strong> users per page</p>
       </div>
     </div>
   );

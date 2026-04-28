@@ -44,6 +44,14 @@
   font-size: 14px;
 }
 
+.results-section {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
 .action-buttons {
   display: flex;
   justify-content: center;
