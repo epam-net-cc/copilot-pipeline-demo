@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GitHubProxy")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84ab9d1ede0e21710eeea7923c5abe94f368d42b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c347408acb07692fd56183bee30510b3b9792ac4")]
 [assembly: System.Reflection.AssemblyProductAttribute("GitHubProxy")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GitHubProxy")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
