@@ -39,4 +39,4 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          copilot -p "Review code under backend folder and suggest improvements"
+          copilot -p "Review code under backend folder: the review should focus on code quality, security vulnerabilities, and adherence to best practices. Provide specific feedback and suggestions for improvement. Output the review in a format that can be displayed as github action issues or warnings."
