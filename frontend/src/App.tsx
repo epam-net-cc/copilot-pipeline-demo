@@ -67,18 +67,19 @@ function App() {
             </div>
           )}
 
-          <Pagination
-            currentSince={since}
-            perPage={perPage}
-            onSinceChange={(value) => setSince(value)}
-            onPerPageChange={(value) => setPerPage(value)}
-            onNextPage={handleNextPage}
-            onPreviousPage={handlePreviousPage}
-            isLoading={isLoading}
-            hasData={users.length > 0}
-          />
+          <section className="results-section">
+            <Pagination
+              currentSince={since}
+              perPage={perPage}
+              onPerPageChange={(value) => setPerPage(value)}
+              onNextPage={handleNextPage}
+              onPreviousPage={handlePreviousPage}
+              isLoading={isLoading}
+              hasData={users.length > 0}
+            />
 
-          <UserList users={users} isLoading={isLoading} />
+            <UserList users={users} isLoading={isLoading} />
+          </section>
 
           <div className="action-buttons">
             <button
