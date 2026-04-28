@@ -39,4 +39,4 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          copilot -p "Review code under backend folder and suggest improvements" -o "markdown" > copilot_suggestions.md
+          copilot -p "Review code under backend folder and suggest improvements"
