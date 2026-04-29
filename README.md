@@ -8,6 +8,22 @@ A full-stack application for browsing GitHub users with cursor-based pagination:
 
 This project provides a strongly-typed, full-stack experience for exploring GitHub's public users API with interactive pagination and a responsive UI.
 
+```
+┌─────────────────────────────┐        ┌──────────────────────────────┐        ┌─────────────────┐
+│  React Frontend             │        │  .NET Backend                │        │  GitHub API     │
+│  localhost:5173             │        │  localhost:5191              │        │  api.github.com │
+│                             │        │                              │        │                 │
+│  App.tsx                    │        │  UsersController             │        │                 │
+│    └─ UserList              │──GET──▶│    └─ IGitHubUsersService    │──GET──▶│  /users         │
+│         (user cards)        │◀──JSON─│         GitHubUsersService   │◀──JSON─│                 │
+│                             │        │                              │        │                 │
+│  githubUsersApi.ts          │        │  GitHubUser model            │        │                 │
+│  (fetch via Vite proxy)     │        │  GitHubApiResult<T>          │        │                 │
+└─────────────────────────────┘        └──────────────────────────────┘        └─────────────────┘
+
+  Dev: Vite proxies /users → http://localhost:5191
+```
+
 **Backend Features:**
 - Proxy Endpoint: `GET /users` — List users with optional pagination
 - Strongly Typed: All GitHub User objects deserialized into `GitHubUser` model
