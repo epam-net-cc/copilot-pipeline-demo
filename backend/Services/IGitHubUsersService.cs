@@ -8,4 +8,6 @@ public interface IGitHubUsersService
         int? since,
         int? perPage,
         CancellationToken cancellationToken = default);
+
+    Task<GitHubApiResult<GitHubUser>> GetUserAsync(string username, CancellationToken cancellationToken = default);
 }

@@ -17,4 +17,13 @@ export interface GitHubUser {
   received_events_url: string;
   type: string;
   site_admin: boolean;
+  name: string;
+  company: string;
+  blog: string;
+  location: string;
+  bio: string;
+  public_repos: number;
+  followers: number;
+  following: number;
+  created_at: string;
 }
