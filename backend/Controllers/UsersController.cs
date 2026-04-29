@@ -38,4 +38,19 @@ public sealed class UsersController : ControllerBase
 
         return StatusCode((int)result.StatusCode, result.ErrorContent);
     }
+
+    [HttpGet("{username}")]
+    [ProducesResponseType(typeof(GitHubProxy.Models.GitHubUser), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+    public async Task<IActionResult> GetUser(string username, CancellationToken cancellationToken)
+    {
+        var result = await _gitHubUsersService.GetUserAsync(username, cancellationToken);
+
+        if (result.IsSuccess)
+            return Ok(result.Data);
+
+        return StatusCode((int)result.StatusCode, result.ErrorContent);
+    }
 }

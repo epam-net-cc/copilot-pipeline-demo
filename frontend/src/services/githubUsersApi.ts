@@ -14,7 +14,35 @@ export interface ListUsersResponse {
   error?: string;
 }
 
+export interface GetUserResponse {
+  user: GitHubUser | null;
+  error?: string;
+}
+
 export const githubUsersApi = {
+  async getUser(username: string): Promise<GetUserResponse> {
+    try {
+      const url = `${API_BASE_URL}/users/${encodeURIComponent(username)}`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        return { user: null, error: `Error ${response.status}: ${errorText}` };
+      }
+
+      const user: GitHubUser = await response.json();
+      return { user };
+    } catch (error) {
+      return {
+        user: null,
+        error: `Failed to fetch user: ${error instanceof Error ? error.message : String(error)}`,
+      };
+    }
+  },
+
   async listUsers(params: ListUsersParams = {}): Promise<ListUsersResponse> {
     try {
       const query = new URLSearchParams();

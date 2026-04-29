@@ -45,6 +45,31 @@ public sealed class GitHubUsersService : IGitHubUsersService
             null);
     }
 
+    public async Task<GitHubApiResult<GitHubUser>> GetUserAsync(
+        string username,
+        CancellationToken cancellationToken = default)
+    {
+        var requestUri = $"{GitHubApiBase}/users/{Uri.EscapeDataString(username)}";
+
+        using var response = await _httpClient.GetAsync(requestUri, cancellationToken);
+        var content = await response.Content.ReadAsStringAsync(cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return new GitHubApiResult<GitHubUser>(
+                response.StatusCode,
+                null,
+                content);
+        }
+
+        var user = JsonSerializer.Deserialize<GitHubUser>(content, JsonOptions);
+
+        return new GitHubApiResult<GitHubUser>(
+            HttpStatusCode.OK,
+            user,
+            null);
+    }
+
     private static string BuildQuery(int? since, int? perPage)
     {
         var parts = new List<string>();

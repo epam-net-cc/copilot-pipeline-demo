@@ -57,4 +57,31 @@ public sealed class GitHubUser
 
     [JsonPropertyName("site_admin")]
     public bool SiteAdmin { get; init; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; init; } = string.Empty;
+
+    [JsonPropertyName("company")]
+    public string Company { get; init; } = string.Empty;
+
+    [JsonPropertyName("blog")]
+    public string Blog { get; init; } = string.Empty;
+
+    [JsonPropertyName("location")]
+    public string Location { get; init; } = string.Empty;
+
+    [JsonPropertyName("bio")]
+    public string Bio { get; init; } = string.Empty;
+
+    [JsonPropertyName("public_repos")]
+    public int PublicRepos { get; init; }
+
+    [JsonPropertyName("followers")]
+    public int Followers { get; init; }
+
+    [JsonPropertyName("following")]
+    public int Following { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public string CreatedAt { get; init; } = string.Empty;
 }

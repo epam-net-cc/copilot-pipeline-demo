@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { UserList } from './components/UserList';
+import { UserDetail } from './components/UserDetail';
 import { Pagination } from './components/Pagination';
 import type { GitHubUser } from './types/GitHubUser';
 import { githubUsersApi } from './services/githubUsersApi';
@@ -11,6 +12,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [since, setSince] = useState(0);
   const [perPage, setPerPage] = useState(30);
+  const [selectedUsername, setSelectedUsername] = useState<string | null>(null);
 
   const fetchUsers = async (startId: number, count: number) => {
     setIsLoading(true);
@@ -68,17 +70,25 @@ function App() {
           )}
 
           <section className="results-section">
-            <Pagination
-              currentSince={since}
-              perPage={perPage}
-              onPerPageChange={(value) => setPerPage(value)}
-              onNextPage={handleNextPage}
-              onPreviousPage={handlePreviousPage}
-              isLoading={isLoading}
-              hasData={users.length > 0}
-            />
-
-            <UserList users={users} isLoading={isLoading} />
+            {selectedUsername ? (
+              <UserDetail
+                username={selectedUsername}
+                onBack={() => setSelectedUsername(null)}
+              />
+            ) : (
+              <>
+                <Pagination
+                  currentSince={since}
+                  perPage={perPage}
+                  onPerPageChange={(value) => setPerPage(value)}
+                  onNextPage={handleNextPage}
+                  onPreviousPage={handlePreviousPage}
+                  isLoading={isLoading}
+                  hasData={users.length > 0}
+                />
+                <UserList users={users} isLoading={isLoading} onSelectUser={setSelectedUsername} />
+              </>
+            )}
           </section>
 
           <div className="action-buttons">

@@ -4,9 +4,10 @@ import './UserList.css';
 interface UserListProps {
   users: GitHubUser[];
   isLoading: boolean;
+  onSelectUser: (username: string) => void;
 }
 
-export function UserList({ users, isLoading }: UserListProps) {
+export function UserList({ users, isLoading, onSelectUser }: UserListProps) {
   if (isLoading) {
     return <div className="user-list loading">Loading...</div>;
   }
@@ -19,7 +20,14 @@ export function UserList({ users, isLoading }: UserListProps) {
     <div className="user-list">
       <div className="user-grid">
         {users.map((user) => (
-          <div key={user.id} className="user-card">
+          <div
+            key={user.id}
+            className="user-card"
+            onClick={() => onSelectUser(user.login)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && onSelectUser(user.login)}
+          >
             <img src={user.avatar_url} alt={user.login} className="user-avatar" />
             <h3 className="user-login">{user.login}</h3>
             <p className="user-id">ID: {user.id}</p>
